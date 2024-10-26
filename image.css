@@ -1,0 +1,153 @@
+/* Основной контейнер для карусели */
+.content-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+}
+
+/* Стиль для изображений */
+.content-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Карусель для изображений */
+.image-carousel {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    touch-action: pan-x; /* Поддержка свайпов на мобильных устройствах */
+}
+
+/* Кнопки навигации */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* Установлено низкое значение z-index */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+}
+
+
+.carousel-button-left {
+    left: 10px;
+}
+
+.carousel-button-right {
+    right: 10px;
+}
+
+/* Стили для увеличенного изображения на весь экран */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.content-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.content-description {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.content-location {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.content-location .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.content-tags {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 3px 8px;
+    margin-right: 5px;
+}
+
+.content-contact {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.content-contact .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.content-contact a {
+    text-decoration: none;
+    color: #007bff; /* Цвет для ссылки */
+    transition: color 0.2s;
+}
+
+.content-contact a:hover {
+    color: #0056b3; /* Цвет ссылки при наведении */
+}
