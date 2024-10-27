@@ -34,13 +34,13 @@ setTimeout(() => {
 
 document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
+    localStorage.setItem('installApp', 'false');
+    document.getElementById('pwa-modal').style.display = 'none';
     if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
             console.log('Пользователь сделал выбор: ', choiceResult.outcome);
             if (choiceResult.outcome === 'accepted') {
-                localStorage.setItem('installApp', 'false');
-                document.getElementById('pwa-modal').style.display = 'none';
                 console.log('Пользователь установил PWA');
             } else {
                 console.log('Пользователь отклонил установку PWA');
