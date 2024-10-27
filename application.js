@@ -13,18 +13,22 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Показ модального окна для установки PWA
+function showPwaModal() {
+    document.getElementById('pwa-modal').style.display = 'flex';
+}
 
 // Событие beforeinstallprompt
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    showModal(); // Отображаем модальное окно при событии
+    showPwaModal(); // Отображаем модальное окно при событии
 });
 
 // Отображение модального окна через 30 секунд
 setTimeout(() => {
     if (!localStorage.getItem('installApp')) {
-        showModal();
+        showPwaModal();
     }
 }, 30000);
 
