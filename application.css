@@ -1,7 +1,8 @@
+/* Стили для модального окна */
 #pwa-modal {
     display: none; /* Изначально скрыто */
     position: fixed;
-    z-index: 1000;
+    z-index: 1000; /* Убедитесь, что модальное окно отображается поверх других элементов */
     left: 0;
     top: 0;
     width: 100%;
@@ -11,9 +12,65 @@
     align-items: center;
 }
 
+/* Стили для модального содержимого */
 .pwa-modal-content {
-    background-color: white;
+    background: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px; /* Увеличен радиус для скругления углов */
+    width: 100%;
+    max-width: 400px; /* Ограничение максимальной ширины */
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Позволяет прокручивать содержимое, если оно слишком большое */
+    max-height: 90%; /* Ограничение максимальной высоты для мобильных устройств */
+}
+
+/* Стили для заголовка и кнопок */
+.pwa-modal-content h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.pwa-modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pwa-modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+    #pwa-modal {
+        display: flex; /* Убедитесь, что модальное окно отображается как flex-контейнер */
+    }
+
+    .pwa-modal-content {
+        width: 90%; /* Ширина на мобильных устройствах */
+        height: auto;
+        max-height: 90%;
+        border-radius: 0; /* Убираем скругление для мобильных устройств */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Центрирует содержимое */
+    }
+
+    .pwa-modal-content h2 {
+        font-size: 20px; /* Увеличен размер шрифта заголовка */
+        text-align: center; /* Центрирует заголовок */
+    }
+
+    .pwa-modal-content button {
+        font-size: 18px; /* Увеличен размер шрифта кнопок */
+    }
 }
