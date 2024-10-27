@@ -13,6 +13,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Показ модального окна для установки PWA
+function showModal() {
+    document.getElementById('pwa-modal').style.display = 'flex';
+}
+
 // Событие beforeinstallprompt
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -31,8 +36,6 @@ document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
     if (deferredPrompt) {
         deferredPrompt.prompt();
-        localStorage.setItem('installApp', 'false');
-        document.getElementById('pwamodal').style.display = 'none';
         deferredPrompt.userChoice.then((choiceResult) => {
             console.log('Пользователь сделал выбор: ', choiceResult.outcome);
             if (choiceResult.outcome === 'accepted') {
@@ -42,11 +45,13 @@ document.getElementById('AppBtn').onclick = () => {
             }
             deferredPrompt = null;
         });
+        localStorage.setItem('installApp', 'false');
+        document.getElementById('pwa-modal').style.display = 'none';
     }
 };
 
 document.getElementById('closeBtn').onclick = function () {
-    document.getElementById('pwamodal').style.display = 'none'; // Изменено
+    document.getElementById('pwa-modal').style.display = 'none'; // Изменено
 };
 
 function checkInstallApp() {
@@ -55,10 +60,10 @@ function checkInstallApp() {
         // Если не существует, создаем его и устанавливаем значение true
         localStorage.setItem('installApp', 'true');
         // Показываем модальное окно, так как приложение только что было установлено
-        document.getElementById('pwamodal').style.display = 'flex';
+        document.getElementById('pwa-modal').style.display = 'flex';
     } else if (localStorage.getItem('installApp') === 'true') {
         // Если значение true, показываем модальное окно
-        document.getElementById('pwamodal').style.display = 'flex';
+        document.getElementById('pwa-modal').style.display = 'flex';
     }
     // Если значение false, ничего не делаем
 }
