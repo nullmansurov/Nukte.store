@@ -32,7 +32,6 @@ setTimeout(() => {
     }
 }, 30000);
 
-// Обработка нажатия кнопки установки PWA
 document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
     if (deferredPrompt) {
@@ -41,23 +40,34 @@ document.getElementById('AppBtn').onclick = () => {
             console.log('Пользователь сделал выбор: ', choiceResult.outcome);
             if (choiceResult.outcome === 'accepted') {
                 console.log('Пользователь установил PWA');
-                localStorage.setItem('installApp', 'true'); // Сохраняем, что пользователь установил приложение
             } else {
                 console.log('Пользователь отклонил установку PWA');
             }
             deferredPrompt = null;
         });
-    }
-};
-
-// Обработка нажатия кнопки закрытия модального окна
-document.getElementById('closeBtn').onclick = function () {
-    document.getElementById('pwa-modal').style.display = 'none'; // Закрытие модального окна
-};
-
-// Проверка при загрузке страницы, установлено ли приложение
-window.onload = () => {
-    if (localStorage.getItem('installApp') === 'true') {
+        localStorage.setItem('installApp', 'false');
         document.getElementById('pwa-modal').style.display = 'none';
     }
+};
+
+document.getElementById('closeBtn').onclick = function () {
+    document.getElementById('pwa-modal').style.display = 'none'; // Изменено
+};
+
+function checkInstallApp() {
+    // Проверяем, существует ли ключ installApp в localStorage
+    if (localStorage.getItem('installApp') === null) {
+        // Если не существует, создаем его и устанавливаем значение true
+        localStorage.setItem('installApp', 'true');
+        // Показываем модальное окно, так как приложение только что было установлено
+        document.getElementById('pwa-modal').style.display = 'flex';
+    } else if (localStorage.getItem('installApp') === 'true') {
+        // Если значение true, показываем модальное окно
+        document.getElementById('pwa-modal').style.display = 'flex';
+    }
+    // Если значение false, ничего не делаем
+}
+
+window.onload = () => {
+    checkInstallApp();
 };
