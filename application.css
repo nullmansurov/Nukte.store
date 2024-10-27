@@ -1,4 +1,3 @@
-/* Стили для модального окна PWA */
 #pwa-modal {
     display: none; /* Изначально скрыто */
     position: fixed;
@@ -16,4 +15,5 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    te
+    text-align: center;
+}
