@@ -22,7 +22,9 @@ function showPwaModal() {
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    showPwaModal(); // Отображаем модальное окно при событии
+    if (!localStorage.getItem('installApp') || localStorage.getItem('installApp') === 'false') {
+        showPwaModal();
+    }
 });
 
 // Отображение модального окна через 30 секунд
@@ -34,7 +36,6 @@ setTimeout(() => {
 
 document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
-    localStorage.setItem('installApp', 'false');
     document.getElementById('pwa-modal').style.display = 'none';
     if (deferredPrompt) {
         deferredPrompt.prompt();
@@ -42,8 +43,10 @@ document.getElementById('AppBtn').onclick = () => {
             console.log('Пользователь сделал выбор: ', choiceResult.outcome);
             if (choiceResult.outcome === 'accepted') {
                 console.log('Пользователь установил PWA');
+                localStorage.setItem('installApp', 'true'); // Устанавливаем в true при успешной установке
             } else {
                 console.log('Пользователь отклонил установку PWA');
+                localStorage.setItem('installApp', 'false'); // Ставим false, если отклонено
             }
             deferredPrompt = null;
         });
@@ -51,21 +54,16 @@ document.getElementById('AppBtn').onclick = () => {
 };
 
 document.getElementById('closeBtn').onclick = function () {
-    document.getElementById('pwa-modal').style.display = 'none'; // Изменено
+    document.getElementById('pwa-modal').style.display = 'none';
 };
 
+// Проверяем, установлено ли приложение
 function checkInstallApp() {
-    // Проверяем, существует ли ключ installApp в localStorage
-    if (localStorage.getItem('installApp') === null) {
-        // Если не существует, создаем его и устанавливаем значение true
-        localStorage.setItem('installApp', 'true');
-        // Показываем модальное окно, так как приложение только что было установлено
-        document.getElementById('pwa-modal').style.display = 'flex';
-    } else if (localStorage.getItem('installApp') === 'true') {
-        // Если значение true, показываем модальное окно
-        document.getElementById('pwa-modal').style.display = 'flex';
+    if (localStorage.getItem('installApp') === 'true') {
+        console.log('Бағдарлама орнатылған');
+    } else {
+        showPwaModal();
     }
-    // Если значение false, ничего не делаем
 }
 
 window.onload = () => {
