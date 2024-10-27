@@ -39,14 +39,14 @@ document.getElementById('AppBtn').onclick = () => {
         deferredPrompt.userChoice.then((choiceResult) => {
             console.log('Пользователь сделал выбор: ', choiceResult.outcome);
             if (choiceResult.outcome === 'accepted') {
+                localStorage.setItem('installApp', 'false');
+                document.getElementById('pwa-modal').style.display = 'none';
                 console.log('Пользователь установил PWA');
             } else {
                 console.log('Пользователь отклонил установку PWA');
             }
             deferredPrompt = null;
         });
-        localStorage.setItem('installApp', 'false');
-        document.getElementById('pwa-modal').style.display = 'none';
     }
 };
 
