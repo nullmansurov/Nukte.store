@@ -1,3 +1,5 @@
+const ws = new WebSocket('ws://16.171.19.206:8715');
+
 const posts = [];
 const ivents = [];
 let displayPostsFlag = true;
