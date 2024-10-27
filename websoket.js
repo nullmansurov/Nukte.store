@@ -1,4 +1,4 @@
-const ws = new WebSocket('wss://16.171.19.206:8715');
+const ws = new WebSocket('ws://16.171.19.206:8715');
 
 const posts = [];
 const ivents = [];
