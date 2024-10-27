@@ -6,7 +6,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     document.getElementById('pwa-modal').style.display = 'flex'; // Изменено
 });
 
-document.getElementById('installBtn').onclick = () => {
+document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
     if (deferredPrompt) {
         deferredPrompt.prompt();
