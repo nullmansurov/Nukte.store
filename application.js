@@ -13,11 +13,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Показ модального окна для установки PWA
-function showModal() {
-    document.getElementById('pwa-modal').style.display = 'flex';
-}
-
 // Событие beforeinstallprompt
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
