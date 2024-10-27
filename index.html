@@ -1,14 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Server Config</title>
-    <script>
-        const server = '16.171.19.206:8715';
-    </script>
+    <title>Нүкте - Лента</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="image.css">
 </head>
 <body>
-    <h1>WebSocket Server Configuration</h1>
+    <header>
+        <div id="app-title">Нүкте</div>
+        <div class="button-container desktop-buttons">
+            <button class="button" id="show-posts">
+                <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
+            </button>
+            <button class="button" id="show-ivents">
+                <img src="icons/ivent.png" alt="Ивенттер" class="icon"> Ивенттер
+            </button>
+            <button class="button" id="show-filters">
+                <img src="icons/subscribe.png" alt="Жазылымдар" class="icon"> Жазылымдар
+            </button>
+        </div>
+    </header>
+    <div class="content-container">
+        <ul id="content-list"></ul>
+    </div>
+    
+    <div class="mobile-button-container">
+        <div class="mobile-buttons">
+            <button class="button" id="show-posts-mobile">
+                <img src="icons/birzha.png" alt="Биржа" class="icon"> 
+            </button>
+            <button class="button" id="show-ivents-mobile">
+                <img src="icons/ivent.png" alt="Ивенты" class="icon"> 
+            </button>
+            <button class="button" id="show-filters-mobile">
+                <img src="icons/subscribe.png" alt="Жазылымдар" class="icon"> 
+            </button>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Қажетті аумақтарды таңдаңыз</h3>
+            <div id="regions">
+                <label><input type="checkbox" value="Шардара"> Шардара</label>
+                <label><input type="checkbox" value="Ақалтын"> Ақалтын</label>
+                <label><input type="checkbox" value="Достық"> Достық</label>
+            </div>
+            <h3>Тақырыпты таңдаңыз</h3>
+            <div id="tags">
+                <label><input type="checkbox" value="Логистика"> Логистика</label>
+                <label><input type="checkbox" value="Ауыл шаруашылығы"> Ауыл шаруашылығы</label>
+                <label><input type="checkbox" value="Мал шаруашылығы"> Мал шаруашылығы</label>
+            </div>
+            <br>
+            <button id="modal-apply-filters">Сақтау</button>
+            <button id="modal-clear-filters">Бәрін өшіру</button>
+            <button id="modal-close">Жабу</button>
+        </div>
+    </div>
+
+    <script src='scripts.js'></script>
+    <script src='websoket.js'></script>
+    <script src='more.js'></script>
 </body>
 </html>
