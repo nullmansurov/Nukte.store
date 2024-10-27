@@ -77,19 +77,5 @@
     <script src='websoket.js'></script>
     <script src='more.js'></script>
     <script src="application.js" defer></script>
-    <script>
-        // Регистрация сервис-воркера
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Сервис-воркер зарегистрирован с областью:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.error('Ошибка регистрации сервис-воркера:', error);
-                    });
-            });
-        }
-    </script>
 </body>
 </html>
