@@ -96,12 +96,20 @@ function displayContent() {
         let startX;
         carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY; // Новая переменная для отслеживания вертикального смещения
         });
-
+        
         carousel.addEventListener('touchmove', (e) => {
             const moveX = e.touches[0].clientX - startX;
-            carousel.scrollLeft -= moveX;
+            const moveY = e.touches[0].clientY - startY; // Определяем вертикальное движение
+        
+            // Проверяем, если свайп по горизонтали больше вертикального движения
+            if (Math.abs(moveX) > Math.abs(moveY)) {
+                e.preventDefault(); // Предотвращаем вертикальную прокрутку
+                carousel.scrollLeft -= moveX;
+            }
         });
+
     });
 }
 
