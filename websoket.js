@@ -31,7 +31,7 @@ function displayContent() {
             <div class="content-tags">${content.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join(', ')}</div>
             <div class="content-contact">
                 <img src="icons/phone.png" alt="Contact" class="icon" />
-                <a href="${content.url}" target="_blank">Хабарласу</a>
+                <a href="https://${content.url}" target="_blank">Хабарласу</a>
             </div><br>
         `;
 
