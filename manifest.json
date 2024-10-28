@@ -1,7 +1,7 @@
 {
   "name": "Нүкте Биржасы",
   "short_name": "Нүкте",
-  "start_url": "https://nullmansurov.github.io/nukte.github.io/",
+  "start_url": "https://nullmansurov.github.io/nukte/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
