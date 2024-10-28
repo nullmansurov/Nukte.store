@@ -20,7 +20,7 @@ function displayContent() {
     filteredArray.forEach(content => {
         const listItem = document.createElement('li');
         listItem.className = className;
-        
+
         listItem.innerHTML = `
             <div class="content-title">${content.title}</div>
             <div class="content-description">${content.description}</div><br>
@@ -35,8 +35,6 @@ function displayContent() {
             </div><br>
         `;
 
-        // Остальная часть кода остается без изменений
-        // Создаем контейнер для карусели
         const imageContainer = document.createElement('div');
         imageContainer.className = 'content-image-container';
         imageContainer.id = `carousel-${content.id}`;
@@ -89,29 +87,32 @@ function displayContent() {
 
         contentList.appendChild(listItem);
         contentList.appendChild(imageContainer);
-
-        // Добавляем разрыв строки после контейнера изображений
         contentList.appendChild(document.createElement('br'));
 
-        let startX;
+        let startX, startY;
+
         carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY; // Новая переменная для отслеживания вертикального смещения
-        });
-        
-        carousel.addEventListener('touchmove', (e) => {
-            const moveX = e.touches[0].clientX - startX;
-            const moveY = e.touches[0].clientY - startY; // Определяем вертикальное движение
-        
-            // Проверяем, если свайп по горизонтали больше вертикального движения
-            if (Math.abs(moveX) > Math.abs(moveY)) {
-                e.preventDefault(); // Предотвращаем вертикальную прокрутку
-                carousel.scrollLeft -= moveX;
-            }
+            startY = e.touches[0].clientY;
         });
 
+        carousel.addEventListener('touchmove', (e) => {
+            const moveX = e.touches[0].clientX - startX;
+            const moveY = e.touches[0].clientY - startY;
+
+            // Если перемещение по оси Y больше, чем по оси X, не блокируем прокрутку
+            if (Math.abs(moveY) > Math.abs(moveX)) {
+                return; // Позволяем прокрутку страницы
+            }
+
+            // В противном случае, прокручиваем карусель
+            carousel.scrollLeft -= moveX;
+            e.preventDefault(); // Предотвращаем стандартное поведение прокрутки
+        });
     });
 }
+
+
 
 
 ws.onmessage = function(event) {
