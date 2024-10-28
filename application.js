@@ -62,9 +62,7 @@ function checkInstallApp() {
     if (localStorage.getItem('installApp') === 'true') {
         console.log('Бағдарлама орнатылған');
     } else {
-        setTimeout(() => {
-            showPwaModal();
-        }, 30000);
+        showPwaModal();
     }
 }
 
