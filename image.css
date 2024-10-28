@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    overflow: hidden;
+    overflow: hidden; /* Это должно быть hidden */
 }
 
 /* Стиль для изображений */
@@ -18,7 +18,6 @@
     object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    touch-action: pan-y;
 }
 
 /* Карусель для изображений */
@@ -26,10 +25,11 @@
     display: flex;
     gap: 10px;
     width: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Это должно быть hidden */
     scroll-behavior: smooth;
-    touch-action: pan-x; /* Поддержка свайпов на мобильных устройствах */
+    touch-action: pan-x pan-y; /* Разрешение вертикальной и горизонтальной прокрутки */
 }
+
 
 /* Кнопки навигации */
 .carousel-button {
