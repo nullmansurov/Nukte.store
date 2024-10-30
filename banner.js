@@ -27,5 +27,3 @@ function displayRandomBanner() {
     container.innerHTML = '';
     container.appendChild(link);
 }
-
-displayRandomBanner();
