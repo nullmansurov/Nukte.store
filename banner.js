@@ -1,7 +1,7 @@
 // Массив баннеров с их изображениями и ссылками
 const banners = [
-    { image: 'banners/banner1.jpg', link: 'https://example.com/banner1' },
-    { image: 'banners/banner2.png', link: 'https://example.com/banner2' },
+    { image: '/banners/banner1.jpg', link: 'https://example.com/banner1' },
+    { image: '/banners/banner2.png', link: 'https://example.com/banner2' },
 ];
 
 // Функция для выбора случайного баннера
