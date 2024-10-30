@@ -53,6 +53,13 @@
                 <p>Жарнаманы салғаннан кейін, міндетті түрде қолжетімділігін өзгертіңіз, немесе сіздің жарнамаңыз тек іздеу арқылы көрсетеледі. Ашық биржаға жарнаманы қою үшін боттағы "Менің жарнамаларым" батырмасын басыңыз. Сосын сіздің бүкіл жаранмаларыңызды көрсеті. Сол жердегі қолжетімілікті өзгерту батырмасын бассаңыз, жарнамаңыз биржаға 4 сағатқа шығады.</p>
             </div>
         </div>
+         <div class="faq-item">
+            <div class="faq-title">Маған көмек қажет!</div>
+            <div class="faq-content">
+                <p>Егерде биржада бір нәрсені түсінбей жатырсаңыз, бізден көмек сұрауңызға болады. Ол үшін төмендегі батырманы басып, телеграм чатқа жазыңыз</p>
+                <a href="https://t.me/nuktebirzha/6" class="button">Арыз жәшігі</a>
+            </div>
+        </div>
         <div class="faq-item">
             <div class="faq-title">Коннект деген не?</div>
             <div class="faq-content">
@@ -67,10 +74,21 @@
             </div>
         </div>
         <div class="faq-item">
-            <div class="faq-title">Алаяқтар/спамерлер/оқыс жаранама биржадан таптым?</div>
+            <div class="faq-title">Алаяқтар/спамерлер/оқыс жарнама биржадан таптым?</div>
             <div class="faq-content">
                 <p>Егерде биржада алаяқтардың немесе спамерлердің жарнамасын көрсеңіз, не болмаса оқыс жарнаманы байқап қалсаңыз, арыз жәшігіне скрин етіп жіберіңіз.</p>
                 <a href="https://t.me/nuktebirzha/4" class="button">Арыз жәшігі</a>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-title">Жарнама қоюдың ережелері</div>
+            <div class="faq-content">
+                <p>Жарнама қою барысында, сізге келесі нәрселерді жасауға болмайды:
+                <br>Спам жасауға (бір жарнаманы бірнеше рет қою)
+                <br>Алаяқтық жарнама жасауға
+                <br>Оқсы жаррнамаларды салуға
+                <br>
+                <br>Егерде сіз жоғарыда айтылған ережелерді бұзсаңыз, сіздің жарнамаларыңыз өшіріліп, аккаутыңыз бұғатталады</p>
             </div>
         </div>
     </main>
@@ -82,7 +100,7 @@
 
             faqTitles.forEach(title => {
                 title.addEventListener('click', () => {
-                    const content = title.nextElementSibling; // Находим следующий элемент (содержимое)
+                    const content = title.nextElementSibling;
 
                     if (content.style.display === "block") {
                         content.style.display = "none"; // Скрыть контент
@@ -91,8 +109,8 @@
                         document.querySelectorAll('.faq-content').forEach(c => {
                             c.style.display = "none";
                         });
-                        content.style.display = "block"; // Показать текущий контент
-                        content.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Прокрутка к контенту
+                        content.style.display = "block";
+                        content.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
                     }
                 });
             });
