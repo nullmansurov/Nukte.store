@@ -136,12 +136,7 @@ function displayContent() {
         const images = postImages[content.id] || [];
 
         if (images.length === 0) {
-            // 1/3 случаев добавляем пустой контейнер `ivent_banner`
-            if (index % 3 === 0) {
-                const emptyBanner = document.createElement('div');
-                emptyBanner.className = 'ivent_banner';
-                imageContainer.appendChild(emptyBanner);
-            }
+            let nosuret = false
         } else {
             images.forEach((imgSrc, index) => {
                 const img = document.createElement('img');
