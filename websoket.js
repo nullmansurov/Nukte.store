@@ -1,26 +1,115 @@
-const ws = new WebSocket('wss://fexing.online:8715');
+let ws; // Переменная для WebSocket
+
+function initializeWebSocket() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        console.log('Соединение уже установлено.');
+        return; // Если соединение уже открыто, просто выходим
+    }
+
+    ws = new WebSocket('wss://fexing.online:8715');
+
+    ws.onopen = function() {
+        console.log('Соединение установлено');
+
+        let isWebSocketOpen = true;
+        const filterMessage = JSON.stringify({
+            selectedRegions: selectedRegions,
+            selectedTags: selectedTags,
+            searchQuery: searchQuery
+        });
+
+        ws.send(filterMessage);
+    };
+
+    ws.onerror = function(error) {
+        console.error("Ошибка WebSocket:", error);
+    };
+
+    ws.onclose = function() {
+        console.log('Соединение закрыто');
+        isWebSocketOpen = false;
+    };
+
+        // Функция для добавления постов в массив, если их еще нет
+    function addPostIfNotExists(newPost) {
+        // Проверяем, существует ли пост уже в массиве
+        const exists = posts.some(post => post.id === newPost.id);
+        if (!exists) {
+            posts.push(newPost);
+        }
+    }
+
+
+    // Обработчик для сообщений WebSocket
+    ws.onmessage = function(event) {
+        try {
+            const data = JSON.parse(event.data);
+
+            // Проверяем тип данных для постов
+            if (data.type === "post_data") {
+                addPostIfNotExists(data.data);
+                displayContent();
+                ws.send("post_received");
+
+            } else if (data.type === "image_data") {
+                const imgSrc = `data:image/jpeg;base64,${btoa(data.data)}`;
+                const postId = data.postId;
+
+                // Сохраняем изображение в глобальный массив
+                saveImageToGlobalArray(postId, imgSrc, 'post');
+
+                // Отображаем изображение, если контейнер существует
+                const postImageContainer = document.getElementById(`post-images-${postId}`);
+                if (postImageContainer) {
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    postImageContainer.appendChild(img);
+                }
+
+                displayContent(); // Обновляем отображение контента
+                ws.send("image_received");
+            } else {
+                console.log("Неизвестный тип данных:", data);
+            }
+        } catch (error) {
+            console.error("Ошибка при обработке сообщения:", error);
+        }
+    };
+    }
+
+// Запускаем первоначальное подключение
+initializeWebSocket();
 
 const posts = [];
-const ivents = [];
-let displayPostsFlag = true;
+const postImages = {};
 let selectedRegion = 'all';
 let selectedTag = 'all';
+let searchQuery = '';
 
-const postImages = {}; // Глобальный объект для хранения изображений постов
-const iventImages = {}; // Глобальный объект для хранения изображений ивентов
 
 function displayContent() {
     const contentList = document.getElementById('content-list');
     contentList.innerHTML = '';
 
-    const contentArray = displayPostsFlag ? posts : ivents;
-    const filteredArray = filterContent(contentArray);
-    const className = displayPostsFlag ? 'post-container' : 'ivent-container';
+    // Получаем массив постов и фильтруем его
+    const filteredArray = filterContent(posts);
+    const className = 'post-container'; // Теперь мы только посты
 
-    filteredArray.forEach(content => {
+    // Если нет постов, отображаем сообщение "Нет постов"
+    if (filteredArray.length === 0) {
+        const noPostsMessage = document.createElement('p');
+        noPostsMessage.textContent = 'Ешқандай ұсыныстар табылмады';
+        noPostsMessage.className = 'no-posts-message';
+        contentList.appendChild(noPostsMessage);
+        return;
+    }
+
+    // Проходим по отфильтрованным постам
+    filteredArray.forEach((content, index) => {
         const listItem = document.createElement('li');
         listItem.className = className;
 
+        // Добавляем содержимое поста
         listItem.innerHTML = `
             <div class="content-title">${content.title}</div>
             <div class="content-description">${content.description}</div><br>
@@ -32,7 +121,7 @@ function displayContent() {
             <div class="content-contact">
                 <img src="icons/phone.png" alt="Contact" class="icon" />
                 <a href="https://${content.url}" target="_blank">Хабарласу</a>
-            </div><br>
+            </div>
         `;
 
         const imageContainer = document.createElement('div');
@@ -43,11 +132,16 @@ function displayContent() {
         carousel.className = 'image-carousel';
         carousel.id = `carousel-images-${content.id}`;
 
-        const images = displayPostsFlag ? postImages[content.id] || [] : iventImages[content.id] || [];
+        // Получаем изображения для поста
+        const images = postImages[content.id] || [];
 
         if (images.length === 0) {
-            const noImageMessage = document.createElement('p');
-            imageContainer.appendChild(noImageMessage);
+            // 1/3 случаев добавляем пустой контейнер `ivent_banner`
+            if (index % 3 === 0) {
+                const emptyBanner = document.createElement('div');
+                emptyBanner.className = 'ivent_banner';
+                imageContainer.appendChild(emptyBanner);
+            }
         } else {
             images.forEach((imgSrc, index) => {
                 const img = document.createElement('img');
@@ -61,11 +155,7 @@ function displayContent() {
                 carousel.appendChild(img);
             });
 
-            if (images.length === 1) {
-                const singleImage = carousel.querySelector('img');
-                singleImage.classList.add('single');
-            }
-
+            // Добавляем навигационные кнопки для карусели, если больше одного изображения
             if (images.length > 1) {
                 const leftButton = document.createElement('button');
                 leftButton.className = 'carousel-button carousel-button-left';
@@ -78,17 +168,25 @@ function displayContent() {
                 rightButton.addEventListener('click', () => scrollCarousel(carousel, 'right'));
 
                 imageContainer.appendChild(leftButton);
-                imageContainer.appendChild(carousel);
                 imageContainer.appendChild(rightButton);
-            } else {
-                imageContainer.appendChild(carousel);
+            }
+
+            imageContainer.appendChild(carousel);
+
+            if (images.length === 1) {
+                const singleImage = carousel.querySelector('img');
+                singleImage.classList.add('single');
             }
         }
 
+        // Добавляем посты и изображения в контейнер
         contentList.appendChild(listItem);
-        contentList.appendChild(imageContainer);
+        if (images.length > 0 || index % 3 === 0) {
+            contentList.appendChild(imageContainer);
+        }
         contentList.appendChild(document.createElement('br'));
 
+        // Обработка касаний для карусели
         let startX, startY;
 
         carousel.addEventListener('touchstart', (e) => {
@@ -100,97 +198,30 @@ function displayContent() {
             const moveX = e.touches[0].clientX - startX;
             const moveY = e.touches[0].clientY - startY;
 
-            // Если перемещение по оси Y больше, чем по оси X, не блокируем прокрутку
             if (Math.abs(moveY) > Math.abs(moveX)) {
-                return; // Позволяем прокрутку страницы
+                return;
             }
 
-            // В противном случае, прокручиваем карусель
             carousel.scrollLeft -= moveX;
-            e.preventDefault(); // Предотвращаем стандартное поведение прокрутки
+            e.preventDefault();
         });
     });
 }
 
-
-
-
-ws.onmessage = function(event) {
-    try {
-        const data = JSON.parse(event.data);
-
-        if (data.type === "post_data") {
-            posts.push(data.data);
-            if (displayPostsFlag) displayContent();
-            ws.send("post_received");
-        } else if (data.type === "ivent_data") {
-            ivents.push(data.data);
-            if (!displayPostsFlag) displayContent();
-            ws.send("ivent_received");
-        } else if (data.type === "image_data") {
-            const imgSrc = `data:image/jpeg;base64,${btoa(data.data)}`;
-            const postId = data.postId;
-            const iventId = data.iventId;
-
-            // Сохраняем изображение в глобальный массив
-            saveImageToGlobalArray(postId, imgSrc, 'post');
-            saveImageToGlobalArray(iventId, imgSrc, 'ivent');
-
-            // Отображаем изображение, если контейнер существует
-            const postImageContainer = document.getElementById(`post-images-${postId}`);
-            if (postImageContainer) {
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                postImageContainer.appendChild(img);
-            }
-            const iventImageContainer = document.getElementById(`ivent-images-${iventId}`);
-            if (iventImageContainer) {
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                iventImageContainer.appendChild(img);
-            }
-
-            displayContent()
-            ws.send("image_received");
-        } else {
-            console.log("Неизвестный тип данных:", data);
-        }
-    } catch (error) {
-        console.error("Ошибка при обработке сообщения:", error);
-    }
-};
 
 function saveImageToGlobalArray(id, imgSrc, type) {
     if (type === 'post') {
         if (!postImages[id]) {
             postImages[id] = []; // Инициализируем массив, если его нет
         }
-        postImages[id].push(imgSrc); // Добавляем новое изображение
-    } else if (type === 'ivent') {
-        if (!iventImages[id]) {
-            iventImages[id] = []; // Инициализируем массив, если его нет
+        // Проверяем, существует ли изображение уже в массиве
+        const exists = postImages[id].some(existingImgSrc => existingImgSrc === imgSrc);
+        if (!exists) {
+            postImages[id].push(imgSrc); // Добавляем новое изображение, если его нет
         }
-        iventImages[id].push(imgSrc); // Добавляем новое изображение
     }
 }
 
-ws.onopen = function() {
-    console.log('Соединение установлено');
-    
-    const filterMessage = JSON.stringify({
-        selectedRegions: selectedRegions,
-        selectedTags: selectedTags
-    });
 
-    ws.send(filterMessage);
-};
-
-ws.onerror = function(error) {
-    console.error("Ошибка WebSocket:", error);
-};
-
-ws.onclose = function() {
-    console.log('Соединение закрыто');
-};
-
+// Вызов функции для отображения контента
 displayContent();

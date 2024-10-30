@@ -1,6 +1,7 @@
 let selectedRegions = JSON.parse(localStorage.getItem('selectedRegions')) || []; // Загружаем регионы из localStorage
 let selectedTags = JSON.parse(localStorage.getItem('selectedTags')) || []; // Загружаем теги из localStorage
 
+
 function filterContent(contentArray) {
     return contentArray.filter(item => {
         // Преобразуем теги в массив, если они не являются массивом
@@ -13,6 +14,15 @@ function filterContent(contentArray) {
         return matchesRegion && matchesTag;
     });
 }
+
+document.getElementById('search-button').onclick = function() {
+    searchQuery = document.getElementById('search-input').value;
+    posts.length = 0;
+    Object.keys(postImages).forEach(key => delete postImages[key]); // Очистка объекта postImages
+    const contentList = document.getElementById('content-list');
+    contentList.innerHTML = ''; // Очищаем содержимое списка постов
+    initializeWebSocket();
+};
 
 function showModal() {
     document.getElementById('modal').style.display = 'flex';
@@ -84,31 +94,8 @@ if (selectedRegions.length === 0) {
     showModal();
 }
 
-// Изменение обработчиков событий для кнопок
-document.getElementById('show-posts').onclick = function() {
-    displayPostsFlag = true;
-    displayContent(); // Не открываем модальное окно, просто отображаем контент
-};
-
-document.getElementById('show-ivents').onclick = function() {
-    displayPostsFlag = false;
-    displayContent(); // Не открываем модальное окно, просто отображаем контент
-};
-
 document.getElementById('show-filters').onclick = function() {
     showModal(); // Открываем модальное окно при нажатии на кнопку "Жазылымдар"
-};
-
-// Изменение обработчиков событий для кнопок
-document.getElementById('show-posts-mobile').onclick = function() {
-    displayPostsFlag = true;
-    displayContent(); // Не открываем модальное окно, просто отображаем контент
-};
-
-
-document.getElementById('show-ivents-mobile').onclick = function() {
-    displayPostsFlag = false;
-    displayContent(); // Не открываем модальное окно, просто отображаем контент
 };
 
 document.getElementById('show-filters-mobile').onclick = function() {

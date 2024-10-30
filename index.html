@@ -15,29 +15,34 @@
     <header>
         <div id="app-title">Нүкте</div>
         <div class="button-container desktop-buttons">
-            <button class="button" id="show-posts">
+            <a href="/index.html" class="button" id="show-posts">
                 <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
-            </button>
-            <button class="button" id="show-ivents">
-                <img src="icons/ivent.png" alt="Ивенттер" class="icon"> Ұсыныстар
-            </button>
-            <button class="button" id="show-filters">
-                <img src="icons/subscribe.png" alt="Жазылымдар" class="icon"> Жазылымдар
-            </button>
+            </a>
+            <a href="/add_post.html" class="button" id="show-ivents">
+                <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
+            </a>
+            <a class="button" id="show-filters">
+                <img src="icons/subscribe.png" alt="Жазылымдар" class="icon">Жазылымдар
+            </a>
         </div>
     </header>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Жарнамаларды іздеу...." />
+        <button id="search-button">Іздеу</button>
+    </div>
     <div class="content-container">
         <ul id="content-list"></ul>
     </div>
     
     <div class="mobile-button-container">
         <div class="mobile-buttons">
-            <button class="button" id="show-posts-mobile">
-                <img src="icons/birzha.png" alt="Биржа" class="icon"> 
-            </button>
-            <button class="button" id="show-ivents-mobile">
-                <img src="icons/ivent.png" alt="Ивенты" class="icon"> 
-            </button>
+            <a href="/index.html" class="button" id="show-posts-mobile">
+                <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
+            </a>
+            <a href="/add_post.html" class="button" id="show-ivents-mobile">
+                <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
+            </a>
             <button class="button" id="show-filters-mobile">
                 <img src="icons/subscribe.png" alt="Жазылымдар" class="icon"> 
             </button>

@@ -32,7 +32,7 @@ setTimeout(() => {
     if (!localStorage.getItem('installApp')) {
         showPwaModal();
     }
-}, 30000);
+}, 10000);
 
 document.getElementById('AppBtn').onclick = () => {
     console.log('Кнопка установки нажата');
@@ -62,7 +62,7 @@ function checkInstallApp() {
     if (localStorage.getItem('installApp') === 'true') {
         console.log('Бағдарлама орнатылған');
     } else {
-        showPwaModal();
+        setTimeout();
     }
 }
 
