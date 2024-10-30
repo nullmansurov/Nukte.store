@@ -30,6 +30,7 @@ document.getElementById("oldestBtn").addEventListener("click", () => {
 });
 
 document.getElementById('search-button').onclick = function() {
+    ws.close();
     searchQuery = document.getElementById('search-input').value;
     posts.length = 0;
     Object.keys(postImages).forEach(key => delete postImages[key]); // Очистка объекта postImages
