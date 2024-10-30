@@ -154,3 +154,14 @@ ul li {
     }
 }
 
+.newest-filter {
+    display: flex;
+    justify-content: center; /* Центрирует ссылки */
+    gap: 15px; /* Отступ между ссылками */
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+.newest-filter a:hover {
+    color: #2980b9; /* Смена цвета при наведении */
+}
+

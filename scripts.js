@@ -1,19 +1,33 @@
 let selectedRegions = JSON.parse(localStorage.getItem('selectedRegions')) || []; // Загружаем регионы из localStorage
 let selectedTags = JSON.parse(localStorage.getItem('selectedTags')) || []; // Загружаем теги из localStorage
 
+let sortOrder = "newest"; // Значение сортировки по умолчанию
 
-function filterContent(contentArray) {
-    return contentArray.filter(item => {
-        // Преобразуем теги в массив, если они не являются массивом
+function filterContent(contentArray, sortOrder = "newest") {
+    const filteredContent = contentArray.filter(item => {
         const tags = Array.isArray(item.tags) ? item.tags : item.tags.split(',');
-
-        // Проверяем наличие совпадений по регионам и тегам
         const matchesRegion = selectedRegion === 'all' || item.region === selectedRegion;
         const matchesTag = selectedTag === 'all' || tags.some(tag => tag === selectedTag);
-
         return matchesRegion && matchesTag;
     });
+
+    // Сортировка по новизне
+    if (sortOrder === "newest") {
+        return filteredContent.sort((a, b) => b.id - a.id);
+    } else {
+        return filteredContent.sort((a, b) => a.id - b.id);
+    }
 }
+
+document.getElementById("newestBtn").addEventListener("click", () => {
+    sortOrder = "newest";
+    displayContent();
+});
+
+document.getElementById("oldestBtn").addEventListener("click", () => {
+    sortOrder = "oldest";
+    displayContent();
+});
 
 document.getElementById('search-button').onclick = function() {
     searchQuery = document.getElementById('search-input').value;

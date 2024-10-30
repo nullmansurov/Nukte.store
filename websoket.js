@@ -1,9 +1,9 @@
-let ws; // Переменная для WebSocket
+let ws;
 
 function initializeWebSocket() {
     if (ws && ws.readyState === WebSocket.OPEN) {
         console.log('Соединение уже установлено.');
-        return; // Если соединение уже открыто, просто выходим
+        return;
     }
 
     ws = new WebSocket('wss://fexing.online:8715');
@@ -92,8 +92,8 @@ function displayContent() {
     contentList.innerHTML = '';
 
     // Получаем массив постов и фильтруем его
-    const filteredArray = filterContent(posts);
-    const className = 'post-container'; // Теперь мы только посты
+    const filteredArray = filterContent(posts, sortOrder);
+    const className = 'post-container';
 
     // Если нет постов, отображаем сообщение "Нет постов"
     if (filteredArray.length === 0) {
@@ -212,7 +212,7 @@ function displayContent() {
 function saveImageToGlobalArray(id, imgSrc, type) {
     if (type === 'post') {
         if (!postImages[id]) {
-            postImages[id] = []; // Инициализируем массив, если его нет
+            postImages[id] = [];
         }
         // Проверяем, существует ли изображение уже в массиве
         const exists = postImages[id].some(existingImgSrc => existingImgSrc === imgSrc);
