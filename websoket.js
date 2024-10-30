@@ -118,10 +118,10 @@ function displayContent() {
                 ${content.where}
             </div>
             <div class="content-tags">${content.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join(', ')}</div>
-            <a href="https://${content.url}" target="_blank"> <div class="content-contact">
+            <div class="content-contact">
                 <img src="icons/phone.png" alt="Contact" class="icon" />
                 <a href="https://${content.url}" target="_blank">Хабарласу</a>
-            </div></a>
+            </div>
         `;
 
         const imageContainer = document.createElement('div');
