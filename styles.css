@@ -58,7 +58,7 @@ header {
 
 .content-container {
     max-width: 850px; 
-    margin: 15px auto; /* верхний и нижний отступ по 15px */
+    margin: auto;
     padding: 20px; 
     border-radius: 8px; 
 }
