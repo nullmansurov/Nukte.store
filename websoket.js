@@ -15,7 +15,7 @@ function initializeWebSocket() {
         const filterMessage = JSON.stringify({
             selectedRegions: selectedRegions,
             selectedTags: selectedTags,
-            searchQuery: searchQuery
+            ...(searchQuery ? { searchQuery: searchQuery } : {})
         });
 
         ws.send(filterMessage);
