@@ -102,22 +102,5 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/98744044" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const iframe = document.getElementById('dynamic-iframe');
-
-        // Функция для установки высоты iframe
-        function adjustIframeHeight() {
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-        }
-
-        // Убедимся, что iframe загружен перед вычислением высоты
-        iframe.addEventListener('load', adjustIframeHeight);
-
-        // Опционально: периодическое обновление высоты
-        setInterval(adjustIframeHeight, 500); // Проверяет высоту каждые 500 мс
-    });
-</script>
-
 </body>
 </html>
