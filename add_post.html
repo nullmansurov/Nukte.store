@@ -34,50 +34,11 @@
         <h1>Жарнама қосу</h1>
         <section id="instruction">
             <div class="responsive-iframe-container">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc2FPi2aSBYhZsrYbt4wh4MRyj_YxGQrMLVzMhKPHOehhv5LA/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                 <iframe id="dynamic-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSc2FPi2aSBYhZsrYbt4wh4MRyj_YxGQrMLVzMhKPHOehhv5LA/viewform?embedded=true"></iframe>
             </div>
         </section>
         <h2>Жиі қойылатын сұрақтар</h2>
         <p>Төменде биржаға қалай жарнаманы қосуға болатындыңы түсіндірілген:</p>
-        <div class="faq-item">
-            <div class="faq-title">Қалай жарнама қояды?</div>
-            <div class="faq-content">
-                <p>Алдымен сізге ботқа кіріп, "Старт" батырмансын басуыңыз қажет. Алаяқтардан қорғану мақсатында алдымен сіз қарапайым тексерістен өтіңіз. Ол үшін "Мен іскермін" батырмасын басасыз және тексеру онлайн бөлмесіне өтіп, бірнеше минутта Іскер лауазымын аласыз. Содан кейін "Жарнама қосу" батырмансы арқылы, жарнама қоя аласыз</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-title">Жарнаманы қалай биржаға ашады?</div>
-            <div class="faq-content">
-                <p>Жарнаманы салғаннан кейін, міндетті түрде қолжетімділігін өзгертіңіз, немесе сіздің жарнамаңыз тек іздеу арқылы көрсетеледі. Ашық биржаға жарнаманы қою үшін боттағы "Менің жарнамаларым" батырмасын басыңыз. Сосын сіздің бүкіл жаранмаларыңызды көрсеті. Сол жердегі қолжетімілікті өзгерту батырмасын бассаңыз, жарнамаңыз биржаға 4 сағатқа шығады.</p>
-            </div>
-        </div>
-         <div class="faq-item">
-            <div class="faq-title">Маған көмек қажет!</div>
-            <div class="faq-content">
-                <p>Егерде биржада бір нәрсені түсінбей жатырсаңыз, бізден көмек сұрауңызға болады. Ол үшін төмендегі батырманы басып, телеграм чатқа жазыңыз</p>
-                <a href="https://t.me/nuktebirzha/6" class="button">Телеграм чатқа жазу</a>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-title">Коннект деген не?</div>
-            <div class="faq-content">
-                <p>Коннект деген биржадаға жарнама қоюға арналған құрал. Оның мақсаты, спамның алдын-алу. Яғни бір адам бір нәрсені қайталап жібере бермесі үшін. 1 коннект 1 сағат сіздің жарнамаңызды биржада таратады. 4 сағат өткенен кейін, сіздің жарнамамыңыз биржадан алынады. Кейін қайтадан жарнаманы қоса аласыз. Соның арқасында, биржада тек дәл қәзір өтетін қызыметтер мен товарлар тұрады.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-title">Қайдан коннектер алады?</div>
-            <div class="faq-content">
-                <p>Коннектер бүкіл биржа қолданушыларына бір аптасайын беріліп отырады. Апта сайын сіздің коннектіңіз 30 ға дейін толтырылады. Сондықтан сізге ешнәрсені сатып алудың қажет жоқ.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-title">Алаяқтар/спамерлер/оқыс жарнама биржадан таптым?</div>
-            <div class="faq-content">
-                <p>Егерде биржада алаяқтардың немесе спамерлердің жарнамасын көрсеңіз, не болмаса оқыс жарнаманы байқап қалсаңыз, арыз жәшігіне скрин етіп жіберіңіз.</p>
-                <a href="https://t.me/nuktebirzha/4" class="button">Арыз жәшігі</a>
-            </div>
-        </div>
         <div class="faq-item">
             <div class="faq-title">Жарнама қоюдың ережелері</div>
             <div class="faq-content">
@@ -140,6 +101,23 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/98744044" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const iframe = document.getElementById('dynamic-iframe');
+
+        // Функция для установки высоты iframe
+        function adjustIframeHeight() {
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        }
+
+        // Убедимся, что iframe загружен перед вычислением высоты
+        iframe.addEventListener('load', adjustIframeHeight);
+
+        // Опционально: периодическое обновление высоты
+        setInterval(adjustIframeHeight, 500); // Проверяет высоту каждые 500 мс
+    });
+</script>
 
 </body>
 </html>
