@@ -178,16 +178,12 @@ h2 {
 .responsive-iframe-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* Высота контейнера равна высоте окна */
-    overflow: hidden; /* Скрываем возможные прокрутки */
+    overflow: hidden; /* Убираем ненужные скроллы */
 }
 
-/* iframe с полной шириной и высотой */
+/* iframe */
 .responsive-iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
     border: none; /* Убираем границу */
 }
+
