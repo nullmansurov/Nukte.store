@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жарнама қосу</title>
+    <link rel="stylesheet" href="add.css">
+    <link rel="icon" href="icon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div id="app-title">Нүкте</div>
+        <div class="button-container desktop-buttons">
+            <a href="/index.html" class="button" id="show-posts">
+                <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
+            </a>
+            <a href="/add_post.html" class="button" id="show-ivents">
+                <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
+            </a>
+        </div>
+    </header>
+    <div class="mobile-button-container">
+        <div class="mobile-buttons">
+            <a href="/index.html" class="button" id="show-posts-mobile">
+                <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
+            </a>
+            <a href="/add_post.html" class="button" id="show-ivents-mobile">
+                <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <h1>Жаранамаларға жазылу</h1>
+        <section id="instruction">
+            <p>Жарнамаға жазылу үшін телеграм ботқа өтіңіз:</p>
+            <a href="https://t.me/sheberhana_bot" class="button" id="telegram-bot">
+                Telegram-ботқа өту
+            </a>
+        </section>
+
+        <h2>Жиі қойылатын сұрақтар</h2>
+        <p>Төменде биржаға қалай жарнаманы қосуға болатындыңы түсіндірілген:</p>
+        <div class="faq-item">
+            <div class="faq-title">Жарнамаға жазылу деген не?</div>
+            <div class="faq-content">
+                <p>Жарнамаға жазыду - бұл өзіңізге керек бағыттағы жұмыстарды немесе ұсыныстарды табу үшін жасалған құрал. Мысалға "Құрылыс" бағытаны жазылсаңыз, сіз тұратын аймақта адамдар осы бағытта биржаға ұсыныс қосқанда, бірден телеграм аккаунтыңызға хат келеді. Осылай клиенттеріңізді ештеңе жасамай ақ таба аласыз</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-title">Қалай жарнамалаған тіркеледі?</div>
+            <div class="faq-content">
+                <p>Жарнамаларға тіркелу өте оңай. Ол үшін жоғарыдағы "Telegram-ботқа өту" батырмасын басыңыз. Ботқа өтіпі - "Бастау" немесе "Начать" батырмасын басыңыз. Сізден атыңызды, қайда тұратыныңызды және бағытты сұрайды. Соларға жауап берсеңіз болды. </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqTitles = document.querySelectorAll('.faq-title');
+
+            faqTitles.forEach(title => {
+                title.addEventListener('click', () => {
+                    const content = title.nextElementSibling; // Находим следующий элемент (содержимое)
+
+                    if (content.style.display === "block") {
+                        content.style.display = "none"; // Скрыть контент
+                    } else {
+                        // Скрыть все остальные контенты
+                        document.querySelectorAll('.faq-content').forEach(c => {
+                            c.style.display = "none";
+                        });
+                        content.style.display = "block"; // Показать текущий контент
+                        content.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Прокрутка к контенту
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
