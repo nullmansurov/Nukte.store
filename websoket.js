@@ -6,7 +6,7 @@ function initializeWebSocket() {
         return;
     }
 
-    ws = new WebSocket('wss://believe-china-software-hypothetical.trycloudflare.com');
+    ws = new WebSocket('wss://symposium-katrina-scratch-judy.trycloudflare.com');
 
     ws.onopen = function() {
         console.log('Соединение установлено');
