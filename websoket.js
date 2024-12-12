@@ -6,7 +6,7 @@ function initializeWebSocket() {
         return;
     }
 
-    ws = new WebSocket('wss://himself-ha-body-bush.trycloudflare.com');
+    ws = new WebSocket('wss://misc-mods-worth-sampling.trycloudflare.com');
 
     ws.onopen = function() {
         console.log('Соединение установлено');
