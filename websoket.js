@@ -6,7 +6,7 @@ function initializeWebSocket() {
         return;
     }
 
-    ws = new WebSocket('wss://gyperspace.online:8715');
+    ws = new WebSocket('wss://himself-ha-body-bush.trycloudflare.com');
 
     ws.onopen = function() {
         console.log('Соединение установлено');
