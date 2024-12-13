@@ -117,3 +117,8 @@ document.getElementById('show-filters-mobile').onclick = function() {
     showModal(); // Открываем модальное окно
 
 };
+
+document.getElementById('arthana').onclick = function() {
+    window.location.href = 'https://arthana.nukte.store';
+};
+
