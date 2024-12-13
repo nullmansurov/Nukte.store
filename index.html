@@ -13,23 +13,37 @@
     <link rel="icon" href="icon.png" type="image/png">
 </head>
 <body>
-    <header>
-        <div id="app-title">Нүкте</div>
-        <div class="button-container desktop-buttons">
-            <a href="/index.html" class="button" id="show-posts">
-                <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
-            </a>
-            <a href="/add_post.html" class="button" id="show-ivents">
-                <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
-            </a>
-            <a href="/subs.html" class="button" id="show-subs">
-                <img src="icons/subs.png" alt="Жазылымдар" class="icon">Жазылу
-            </a>
-            <a class="button" id="show-filters">
-                <img src="icons/subscribe.png" alt="Жазылымдар" class="icon">Фильтр
-            </a>
+<header>
+    <div id="header-container">
+        <div id="app-title">
+            Нүкте
+            <div class="dropdown">
+                <button class="dropdown-button">
+                    ▼
+                </button>
+                <div class="dropdown-content">
+                    <a href="/arthana.html">Артхана</a>
+                    <a href="/malimet.html">Мәлімет</a>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
+    <div class="button-container desktop-buttons">
+        <a href="/index.html" class="button" id="show-posts">
+            <img src="icons/birzha.png" alt="Биржа" class="icon"> Биржа
+        </a>
+        <a href="/add_post.html" class="button" id="show-ivents">
+            <img src="icons/04.png" alt="Жарнама қосу" class="icon"> Қосу
+        </a>
+        <a href="/subs.html" class="button" id="show-subs">
+            <img src="icons/subs.png" alt="Жазылымдар" class="icon"> Жазылу
+        </a>
+        <a class="button" id="show-filters">
+            <img src="icons/subscribe.png" alt="Жазылымдар" class="icon"> Фильтр
+        </a>
+    </div>
+</header>
+
 
     <div class="newest-filter">
         <a id='newestBtn'>Ең жаңалары</a>
@@ -127,6 +141,20 @@
     <script src='websoket.js'></script>
     <script src='more.js'></script>
     <script src="application.js" defer></script>
+
+    document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.dropdown-content');
+    const button = document.querySelector('.dropdown-button');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+document.querySelector('.dropdown-button').addEventListener('click', function() {
+    const dropdown = document.querySelector('.dropdown-content');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+
 
 </body>
 </html>
