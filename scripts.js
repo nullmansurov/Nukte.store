@@ -118,7 +118,16 @@ document.getElementById('show-filters-mobile').onclick = function() {
 
 };
 
-document.getElementById('arthana').onclick = function() {
-    window.location.href = 'https://arthana.nukte.store';
-};
+    document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.dropdown-content');
+    const button = document.querySelector('.dropdown-button');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+document.querySelector('.dropdown-button').addEventListener('click', function() {
+    const dropdown = document.querySelector('.dropdown-content');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
 
