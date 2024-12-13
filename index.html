@@ -142,19 +142,6 @@
     <script src='more.js'></script>
     <script src="application.js" defer></script>
 
-    document.addEventListener('click', function(event) {
-    const dropdown = document.querySelector('.dropdown-content');
-    const button = document.querySelector('.dropdown-button');
-    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
-    }
-});
-
-document.querySelector('.dropdown-button').addEventListener('click', function() {
-    const dropdown = document.querySelector('.dropdown-content');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-});
-
 
 </body>
 </html>
