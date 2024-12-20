@@ -6,7 +6,7 @@ function initializeWebSocket() {
         return;
     }
 
-    ws = new WebSocket('wss://app.nukte.store:8715');
+    ws = new WebSocket('wss://server.nukte.store:8715');
 
     ws.onopen = function() {
         console.log('Соединение установлено');
